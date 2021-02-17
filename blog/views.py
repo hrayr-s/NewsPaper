@@ -23,7 +23,7 @@ class HomeView(ListView):
         context['last_post_image'] = last_post.image.url
         context['last_post_slug'] = last_post.slug
 
-        f_categories = Category.objects.annotate(count=Count('article')).order_by('-count')
+        f_categories = Category.objects.annotate(count=Count('articles')).order_by('-count')
 
         # Featured category one
         f_category_1_post = Article.objects.filter(category=f_categories[0]).order_by('-published_at')[0]
