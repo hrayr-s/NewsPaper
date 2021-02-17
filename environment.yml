@@ -1,0 +1,30 @@
+name: NewsPaper
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - asgiref=3.3.1
+  - ca-certificates
+  - certifi=2020.12.5
+  - django=3.1.6
+  - krb5=1.17.1
+  - libpq=12.2
+  - openssl=1.1.1h
+  - pip=20.3.1
+  - psycopg2=2.8.5
+  - python=3.8.5
+  - pytz=2020.4
+  - setuptools=51.0.0
+  - sqlite=3.33.0
+  - sqlparse=0.4.1
+  - wheel=0.36.1
+  - zlib=1.2.11
+  - pip:
+    - django-tinymce==3.1.0
+    - django-admin-rangefilter
+    - pillow==8.0.1
+    - uwsgi
+    - mysql-connector-python==8.0.21
+    - mysqlclient==2.0.1
+prefix: C:\Users\laptop\Anaconda3\envs\NewsPaper
+

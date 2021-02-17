@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block meta_title %}{{ object.title }}{% endblock %}
+{% block main %}
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row Article-Detail flex-row">
+    <div class="col-sm-10">
+      <h1 class="display-4 font-italic">{{ object.title }}</h1>
+      <p class="lead my-3">{{ object.description|striptags }}</p>
+    </div>
+    <div class="col-sm-12 post-image">
+      <img src="{{ object.image.url }}" alt="" />
+    </div>
+  </div>
+
+  <article class="blog-post">
+    <p class="blog-post-meta">
+        <a class="p-2 link-secondary" href="{% url 'CategoryArticlePage' object.category.slug %}">{{ object.category.title }}</a>{% for cat in object.categories.all %}, <a class="p-2 link-secondary" href="{% url 'CategoryArticlePage' cat.slug %}">{{ cat.title }}</a>{% endfor %}
+        {{ object.published_at|date:'F j, Y' }} by <a href="{% url 'UserArticlePage' object.creator.username %}">{{ object.creator.username }}</a>
+    </p>
+      {{ object.content|safe }}
+  </article><!-- /.blog-post -->
+{% endblock %}

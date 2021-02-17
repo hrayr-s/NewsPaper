@@ -1,0 +1,67 @@
+{% extends 'layouts/base.html' %}
+{% block meta_title %}Home{% endblock %}
+{% block main %}
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row home-last-post flex-row">
+    <div class="col-sm-10">
+      <h1 class="display-4 font-italic">{{ last_post_title }}</h1>
+      <p class="lead my-3">{{ last_post_body|striptags  }}</p>
+      <p class="lead mb-0"><a href="{% url 'ArticleDetailView' last_post_slug %}" class="text-white fw-bold">Continue reading...</a></p>
+    </div>
+    <div class="col-sm-2 post-image">
+      <img src="{{ last_post_image }}" alt="">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{ featured_one_category }}</strong>
+          <h3 class="mb-0"><a href="{% url 'ArticleDetailView' featured_one_slug %}">{{ featured_one_title }}</a></h3>
+          <div class="mb-1 text-muted">{{ featured_one_date }}</div>
+          <p class="card-text mb-auto">{{ featured_one_body }}</p>
+          <a href="{% url 'ArticleDetailView' featured_one_slug %}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{ featured_one_image }}" alt="" width="200" height="250">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-success">{{ featured_two_category }}</strong>
+          <h3 class="mb-0"><a href="{% url 'ArticleDetailView' featured_two_slug %}">{{ featured_two_title }}</a></h3>
+          <div class="mb-1 text-muted">{{ featured_two_date }}</div>
+          <p class="mb-auto">{{ featured_two_body }}</p>
+          <a href="{% url 'ArticleDetailView' featured_two_slug %}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+            <img src="{{ featured_two_image }}" alt="" width="200" height="250">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="pb-4 mb-4 font-italic border-bottom">
+        From the Firehose
+      </h3>
+        {% for article in page_obj %}
+      <article class="blog-post">
+        <h2 class="blog-post-title"><a href="{% url 'ArticleDetailView' article.slug %}">{{ article.title }}</a></h2>
+        <p class="blog-post-meta"><a class="p-2 link-secondary" href="{% url 'CategoryArticlePage' article.category.slug %}">{{ article.category.title }}</a>{{ article.published_at|date:'F j, Y' }} by <a href="{% url 'UserArticlePage' article.creator.username %}">{{ article.creator.username }}</a></p>
+          {{ article.content|striptags }}
+      </article>
+        {% endfor %}
+      <nav class="blog-pagination" aria-label="Pagination">
+        <a class="btn btn-outline-primary{% if not page_obj.has_next %} disabled{% endif %}" {% if not page_obj.has_next %} aria-disabled="true" tabindex="-1"{% else %}href="/?page={{ page_obj.next_page_number }}"{% endif %}>Older</a>
+        <a class="btn btn-outline-secondary{% if not page_obj.has_previous %} disabled{% endif %}" {% if not page_obj.has_previous %} aria-disabled="true" tabindex="-1"{% else %}href="/?page={{ page_obj.previous_page_number }}"{% endif %}>Newer</a>
+      </nav>
+
+    </div>
+
+  </div><!-- /.row -->
+
+{% endblock %}
