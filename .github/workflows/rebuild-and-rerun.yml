@@ -17,6 +17,7 @@ jobs:
         /usr/bin/python3.8 -m venv /sites/newspaper/venv
     - name: Install dependencies
       run: |
+        pwd
         /sites/newspaper/venv/bin/python -m pip -r install requirements.txt
     - name: Run Tests
       run: |
