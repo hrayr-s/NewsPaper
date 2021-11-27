@@ -13,6 +13,9 @@ jobs:
       max-parallel: 5
 
     steps:
+    - name: Update code
+      run: |
+        git pull origin main
     - name: Remove old env
       run: |
         rm -rf venv
