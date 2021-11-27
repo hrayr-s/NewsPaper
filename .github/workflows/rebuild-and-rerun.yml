@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Remove old env and create new one
       run: |
-        rm -rf venv
+        rm -rf /sites/newspaper/venv
         /usr/bin/python3.8 -m venv /sites/newspaper/venv
     - name: Install dependencies
       run: |
