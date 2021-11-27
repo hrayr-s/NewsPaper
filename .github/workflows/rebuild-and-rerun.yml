@@ -1,0 +1,26 @@
+name: Deploy NewsPaper Prod
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: betta
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - name: Remove old env and create new one
+      run: |
+        rm -rf venv
+        /usr/bin/python3.8 -m venv venv
+    - name: Install dependencies
+      run: |
+        venv/bin/python -m pip -r install requirements.txt
+    - name: Run Tests
+      run: |
+        venv/bin/python manage.py test
+        
+    - name: Restart server
+      run: |
+        sudo systemctl restart newspaper.uwsgi.service
+        sudo service nginx restart
