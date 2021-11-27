@@ -15,17 +15,16 @@ jobs:
     steps:
     - name: Remove old env
       run: |
-        rm -rf /sites/newspaper/venv
+        rm -rf venv
     - name: Create new one
       run: |
-        /usr/bin/python3.8 -m venv /sites/newspaper/venv
+        /usr/bin/python3.8 -m venv venv
     - name: Install dependencies
       run: |
-        pwd
-        /sites/newspaper/venv/bin/python -m pip -r install requirements.txt
+        venv/bin/python -m pip install -r requirements.txt
     - name: Run Tests
       run: |
-        /sites/newspaper/venv/bin/python manage.py test
+        venv/bin/python manage.py test
         
     - name: Restart server
       run: |
