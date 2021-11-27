@@ -9,9 +9,11 @@ jobs:
       max-parallel: 5
 
     steps:
-    - name: Remove old env and create new one
+    - name: Remove old env
       run: |
         rm -rf /sites/newspaper/venv
+    - name: Create new one
+      run: |
         /usr/bin/python3.8 -m venv /sites/newspaper/venv
     - name: Install dependencies
       run: |
