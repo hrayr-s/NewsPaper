@@ -2,6 +2,10 @@ name: Deploy NewsPaper Prod
 
 on: [push]
 
+defaults:
+  run:
+    working-directory: /sites/newspaper
+
 jobs:
   build-linux:
     runs-on: betta
