@@ -7,7 +7,7 @@ Control panel (Used Django Admin UI):
 
 Administrator is able to create and modify news from admin panel using rich text editor (images not allowed in text editor).
 Administrator is able to create categories and assign them to the news.
-Any of news can have one or more categories but only one of them should be defined as "Main category". News
+Any of news can have one or more categories but only one of them should be defined as "Main category".
 News without main category are not allowed. 
     Example of categories: "Politics" "Business" "Tech" "Science" "Health", ets.
 Available list views for categories and news

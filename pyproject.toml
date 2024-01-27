@@ -1,0 +1,31 @@
+[tool.poetry]
+name="NewsPaper"
+version="0.0.1"
+description="Micro blog application on Python/Django."
+license="Free GNU License"
+authors=["Hrayr <stepanyan@hrayr.am>"]
+maintainers=["Hrayr <stepanyan@hrayr.am>"]
+readme="README.md"
+homepage="https://bool.am"
+repository="https://github.com/hrayr-s/NewsPaper"
+documentation="https://github.com/hrayr-s/NewsPaper/wiki"
+keywords=["blog", "news", "python", "django",]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+wheel="^0.42.0"
+certifi="^2023.11.17"
+poetry="1.7.1"
+django="^4.2"
+django-tinymce="^3.6.1"
+django-admin-rangefilter="^0.12.0"
+pillow="^10.2.0"
+uwsgi= { version = "^2.0.23", optional = true }
+psycopg2= { version = "^2.9.9", optional = true }
+
+[tool.poetry.extras]
+live=["uwsgi", "psycopg2"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
