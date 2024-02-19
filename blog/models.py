@@ -2,12 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 from tinymce.models import HTMLField
 from django.utils import timezone
+from mptt.models import MPTTModel, TreeForeignKey
 
 
-class Category(models.Model):
+class Category(MPTTModel):
     title = models.CharField(max_length=128)
     slug = models.SlugField()
     image = models.ImageField(upload_to='categories')
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
 
     def __str__(self):
         return self.title

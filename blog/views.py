@@ -16,7 +16,6 @@ class HomeView(ListView):
 
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = get_home_page_context(self.request)
-        context.update(super().get_context_data(object_list=context['news_paper'], **kwargs))
 
         return context
 

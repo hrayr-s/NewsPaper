@@ -5,12 +5,12 @@ from django.db import models
 from django.utils import timezone
 
 
-def _get_next_featured_category():
+def _get_next_featured_category(count=2):
     for category in Category.objects.annotate(
             count=models.Count(
                 'articles',
                 filter=models.Q(main_articles__published_at__gte=timezone.now() - datetime.timedelta(days=7)))
-    ).order_by('-count'):
+    ).order_by('-count')[:2]:
         yield category
 
 
@@ -34,7 +34,7 @@ def get_home_page_context(request):
     context['featured_one_image'] = f_category_1_post.image.url
     context['featured_one_slug'] = f_category_1_post.slug
 
-    # Featured category one
+    # Featured category two
     f_category_2_post = Article.objects.filter(category=next(f_categories)).order_by('-published_at')[0]
     context['featured_two_category'] = f_category_2_post.category.title
     context['featured_two_title'] = f_category_2_post.title
