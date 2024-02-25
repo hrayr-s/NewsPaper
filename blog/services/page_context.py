@@ -1,6 +1,7 @@
 import datetime
 
 from blog.models import Article, Category
+from blog.services.structures import Article as ArticleStruct
 from django.db import models
 from django.utils import timezone
 
@@ -10,12 +11,38 @@ def _get_next_featured_category(count=2):
             count=models.Count(
                 'articles',
                 filter=models.Q(main_articles__published_at__gte=timezone.now() - datetime.timedelta(days=7)))
-    ).order_by('-count')[:2]:
+    ).order_by('-count')[:count]:
         yield category
+
+
+def _get_featured_articles(*, count=2):
+    for article in Article.objects.filter(
+            featured=True
+    ).select_related(
+        'category'
+    ).prefetch_related(
+        'tags', 'categories'
+    ).order_by('-featured_at', '-published_at')[:count]:
+        yield ArticleStruct(
+            id=article.id,
+            title=article.title,
+            description=article.description,
+            content=article.content,
+            published_at=article.published_at,
+            slug=article.slug,
+            author=article.author,
+            tags=article.tags.all().values_list('name', flat=True),
+            cover_image_url=article.image,
+            category_name=article.category.name,
+            related_categories_ids=article.categories.all().values_list('id', flat=True)
+        )
 
 
 def get_home_page_context(request):
     context = {}
+    context.update({
+        'featured_articles': _get_featured_articles(count=5)
+    })
 
     # Main Post Details
     last_post = Article.objects.order_by('-published_at').first()
@@ -24,26 +51,12 @@ def get_home_page_context(request):
     context['last_post_image'] = last_post and last_post.image.url
     context['last_post_slug'] = last_post and last_post.slug
 
-    f_categories = _get_next_featured_category()
-
-    # Featured category one
-    f_category_1_post = Article.objects.filter(category=next(f_categories)).order_by('-published_at')[0]
-    context['featured_one_category'] = f_category_1_post.category.title
-    context['featured_one_title'] = f_category_1_post.title
-    context['featured_one_body'] = f_category_1_post.description
-    context['featured_one_image'] = f_category_1_post.image.url
-    context['featured_one_slug'] = f_category_1_post.slug
-
-    # Featured category two
-    f_category_2_post = Article.objects.filter(category=next(f_categories)).order_by('-published_at')[0]
-    context['featured_two_category'] = f_category_2_post.category.title
-    context['featured_two_title'] = f_category_2_post.title
-    context['featured_two_body'] = f_category_2_post.description
-    context['featured_two_image'] = f_category_2_post.image.url
-    context['featured_two_slug'] = f_category_2_post.slug
-
     # All news ordered by published time
-    context['news_paper'] = Article.objects.all().exclude(id__in=[last_post.id, f_category_1_post.id,
-                                                                  f_category_2_post.id])
+    context['news_paper'] = Article.objects.all().exclude(
+        id__in=[
+            *(last_post and [last_post.id] or []),
+            *[article.id for article in context['featured_articles']]
+        ]
+    )
 
     return context

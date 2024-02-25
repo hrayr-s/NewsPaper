@@ -19,6 +19,9 @@ poetry="1.7.1"
 django="^4.2"
 django-tinymce="^3.6.1"
 django-admin-rangefilter="^0.12.0"
+django-environ = "^0.11.2"  # django configuration variables easy management
+django-configurations = "^2.4.1"
+django-redis = "5.4.0"
 pillow="^10.2.0"
 uwsgi= { version = "^2.0.23", optional = true }
 psycopg2= { version = "^2.9.9", optional = true }

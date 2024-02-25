@@ -1,4 +1,5 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 
 from blog.forms import ArticleForm
 from blog.models import Category, Article
@@ -17,5 +18,5 @@ class ArticleAdmin(admin.ModelAdmin):
         return super(ArticleAdmin, self).save_model(request=request, obj=obj, form=form, change=change)
 
 
-admin.site.register(Category)
+admin.site.register(Category, MPTTModelAdmin)
 admin.site.register(Article, ArticleAdmin)
