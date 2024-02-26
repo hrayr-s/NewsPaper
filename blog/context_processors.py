@@ -1,14 +1,12 @@
-from django.contrib.messages.api import get_messages
-from django.contrib.messages.constants import DEFAULT_LEVELS
-
 from blog.models import Category
 
 
 def categories(request):
     """
+    Adds categories to the template renderer context.
     Return a list of 'Category' model objects
     """
-    category_list = Category.objects.all().order_by('title')
+    category_list = Category.objects.filter(level=1).annotate().prefetch_related('content').order_by('content__title')
     return {
         'categories': category_list,
     }

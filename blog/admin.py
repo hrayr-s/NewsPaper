@@ -6,8 +6,8 @@ from blog.models import Category, Article
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'published_at', 'updated_at', 'category', 'description')
-    search_fields = ('title', 'content')
+    list_display = ('slug', 'published_at', 'updated_at', 'category')
+    search_fields = ('content__title', 'content__description', 'content__content')
     list_filter = ('published_at', 'category', 'categories',)
     exclude = ('creator', )
     date_hierarchy = 'published_at'

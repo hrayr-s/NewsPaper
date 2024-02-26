@@ -1,33 +1,48 @@
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from tinymce.models import HTMLField
 from django.utils import timezone
-from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.translation import gettext_lazy
+from mptt.models import MPTTModel, TreeForeignKey
+from tinymce.models import HTMLField
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=25, unique=True, db_index=True, verbose_name=gettext_lazy("Tag"))
-    language = models.CharField(max_length=4)
+    language = models.CharField(max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
 
 
 class Category(MPTTModel):
-    title = models.CharField(max_length=128)
     slug = models.SlugField()
     image = models.ImageField(upload_to='categories')
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='subcategories')
 
     def __str__(self):
-        return self.title
+        return self.slug
 
     class Meta:
         verbose_name_plural = 'Categories'
 
 
+class CategoryContent(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='content')
+    language = models.CharField(max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
+
+    title = models.CharField(max_length=128)
+    image = models.ImageField(
+        upload_to='categories',
+        null=True,
+        blank=True,
+        help_text=gettext_lazy("Language specific image. If not set category default image will be taken.")
+    )
+
+    class Meta:
+        verbose_name_plural = 'Categories Contents'
+        verbose_name = 'Category Content'
+
+
 class Article(models.Model):
-    title = models.CharField(max_length=256)
     slug = models.SlugField()
-    tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
     category = models.ForeignKey(
         Category,
         related_name='main_articles',
@@ -38,8 +53,6 @@ class Article(models.Model):
     )
     categories = models.ManyToManyField(
         Category, related_name='articles', verbose_name='Related Categories', blank=True)
-    content = HTMLField()
-    description = models.TextField()
 
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -54,7 +67,7 @@ class Article(models.Model):
     image = models.ImageField(upload_to='articles')
 
     def __str__(self):
-        return self.title
+        return self.slug
 
     class Meta:
         constraints = [
@@ -69,3 +82,19 @@ class Article(models.Model):
         if self.featured and self.featured_at is None:
             self.featured_at = timezone.now()
         super().save(force_insert, force_update, using, update_fields)
+
+
+class ArticleContent(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='content')
+    language = models.CharField(max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
+
+    title = models.CharField(max_length=256)
+    description = models.TextField()
+
+    tags = models.ManyToManyField(Tag, related_name='articles_contents', blank=True)
+    image = models.ImageField(upload_to='articles_contents', blank=True, null=True)
+
+    content = HTMLField()
+
+    class Meta:
+        verbose_name = 'Articles Contents'
