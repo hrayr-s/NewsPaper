@@ -39,6 +39,7 @@ class CategoryContent(models.Model):
     class Meta:
         verbose_name_plural = 'Categories Contents'
         verbose_name = 'Category Content'
+        unique_together = ('category', 'language')
 
 
 class Article(models.Model):
@@ -98,3 +99,4 @@ class ArticleContent(models.Model):
 
     class Meta:
         verbose_name = 'Articles Contents'
+        unique_together = ('article', 'language')

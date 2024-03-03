@@ -37,17 +37,60 @@ News in the listing are paginated by 10 items.
 News in the listing are ordered by creation date with descending direction.
 
 # Deployment
-You can deploy current project on your own computer for development or testing purposes without any server configuration
- or using Nginx web server with uwsgi python module.
+
+The project can be deployed on a local computer for development or testing purposes without any server configuration
+or using Nginx web server with uwsgi python module on a dedicated or virtual server.
+
+In any case a `.env` file with required variables set is required. The file must be located in the project root. An
+example of `.env` content is presented below.
+
+```dotenv
+SECRET_KEY="Some-Secret-Key"
+DATABASE_URL=sqlite:///sqlite3.db
+CACHE_URL=rediscache://127.0.0.1:6379/1?backend=django_redis.cache.RedisCache&client_class=django_redis.client.DefaultClient
+ALLOWED_HOSTS=*
+```
+
+## Local server using Docker and docker-compose
+
+To simply run the local server without any issues:
+
+1. Install Docker Desktop: https://www.docker.com/products/docker-desktop/
+2. Open Terminal/Command Line and run the following
+
+```shell
+docker-compose up -d
+```
+
+The installation and deployment will take time on first run, as it will download several packages required to run the
+Python and deploy the project.
 
 ## Local server deployment for development
-Download Anaconda environment manager from https://www.anaconda.com/ and install it on your computer.
-Open Terminal(Ubuntu/Linux/Mac) / Command Line(Windows) in the project root folder and make sure anaconda(conda) is working properly.
-Run following command to install requirements for project.
-- ``conda env create -f=environment.yml``
 
-After installation is done change environment using command below:
-- ``conda activate NewsPaper``
+There are various ways to create local environment. Below are links to the common known:
+
+- Anaconda (conda): Download Anaconda environment manager from https://www.anaconda.com/. A heavy python package manager
+  with various tools to use.
+- pyenv: The installation instructions are here https://github.com/pyenv/pyenv?tab=readme-ov-file#installation. This as
+  well can be used to create local python environment with specific python version
+- virtualenv (or venv): This can be used alongside with one of the soft
+  above https://docs.python.org/3/library/venv.html. Separates project required packages/libraries from global python
+  environment.
+
+Open Terminal(Ubuntu/Linux/Mac) / Command Line(Windows) in the project root folder. Make sure virtual environment has
+been created and activated using one of the options above before begin.
+
+The project requires poetry installed. This is the package manager used for the prject. For that run:
+
+```shell
+python -m pip install poetry
+```
+
+To install project dependencies run following shell command.
+
+```shell
+poetry install --sync
+```
 
 Use following commands to install and run the project:
 1. ``python manage.py migrate``
@@ -56,11 +99,12 @@ Use following commands to install and run the project:
 When server runs successfully it will output something like this:
 ```System check identified no issues (0 silenced).
 December 11, 2020 - 17:38:55
-Django version 3.1.4, using settings 'NewsPaper.settings.development'
+Django version 3.1.4, using settings 'NewsPaper.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
 ```
 Open browser and go with URL http://127.0.0.1:8000/
 
 ## Public Server deployment
-You can find instructions for deployment on nginx server in the internet.
+
+The instructions for deployment along with nginx server can be found in the internet.

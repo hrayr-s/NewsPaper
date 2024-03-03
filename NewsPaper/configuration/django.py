@@ -12,7 +12,7 @@ class DjangoConfig:
         'django.contrib.staticfiles',
 
         'tinymce',
-        'blog'
+        'blog',
     ]
 
     MIDDLEWARE = [

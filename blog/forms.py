@@ -14,4 +14,4 @@ class ArticleForm(forms.ModelForm):
         categories = self.cleaned_data.get('categories')
 
         if main_category in categories:
-            self.add_error('categories', 'Main category can not be chosen in related category!')
+            self.add_error('categories', 'Main category cannot be chosen in related category!')

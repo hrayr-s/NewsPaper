@@ -1,0 +1,63 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      target: local
+    command: >
+      bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Yerevan
+      REDIS_HOST: redis
+      DB_HOST: db
+      PYTHONUNBUFFERED: 1
+
+    ports:
+      - 8000:8000
+    working_dir: /opt/project
+    volumes:
+      - .:/opt/project
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+      # additional optional local mappings
+      - 26379:6379
+    volumes:
+      - redis:/data
+
+  db:
+    build:
+      dockerfile: postgres.Dockerfile
+    command:
+      - "postgres"
+      - "-c"
+      - "timezone=US/Pacific"
+      - "-c"
+      - "escape_string_warning=off"
+      - "-c"
+      - "standard_conforming_strings=off"
+      - "-c"
+      - "max_parallel_workers_per_gather=4"
+      - "-c"
+      - "log_statement=ddl"
+      - "-c"
+      - "bytea_output=escape"
+    environment:
+      TZ: America/Los_Angeles
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "local-db-pass-1"  # (we are not going to use this password for our app)
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+      # additional optional local mappings
+      - 25432:5432
+
+volumes:
+  redis:
+  postgres:
