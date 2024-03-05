@@ -1,8 +1,9 @@
 name: Deploy NewsPaper Prod
 
 on:
-  tags:
-    - 1.*
+  push:
+    tags:
+      - 1.*
 
 defaults:
   run:
