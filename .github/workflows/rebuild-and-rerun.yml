@@ -1,6 +1,6 @@
 name: Deploy NewsPaper Prod
 
-on: [push]
+#on: [push]
 
 defaults:
   run:
