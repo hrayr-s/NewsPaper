@@ -24,7 +24,7 @@ def _get_featured_articles(*, count=2):
     ).select_related(
         'category'
     ).prefetch_related(
-        'content', 'tags', 'categories', 'category__content'
+        'content', 'content__tags', 'categories', 'category__content'
     ).order_by('-featured_at', '-published_at')[:count]:
         yield ArticleStruct.from_article_model(article=article, lang=lang)
 
