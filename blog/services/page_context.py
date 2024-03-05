@@ -1,9 +1,11 @@
 import datetime
 
-from blog.models import Article, Category
-from blog.services.structures import Article as ArticleStruct
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import get_language
+
+from blog.models import Article, Category
+from blog.services.structures import Article as ArticleStruct
 
 
 def _get_next_featured_category(count=2):
@@ -16,23 +18,26 @@ def _get_next_featured_category(count=2):
 
 
 def _get_featured_articles(*, count=2):
+    lang = get_language()
     for article in Article.objects.filter(
             featured=True
     ).select_related(
         'category'
     ).prefetch_related(
-        'tags', 'categories'
+        'content', 'tags', 'categories', 'category__content'
     ).order_by('-featured_at', '-published_at')[:count]:
+        content = list(content for content in article.content.all() if content.language == lang)[0]
+        category_name = list(category.name for category in article.category.content.all() if category.language == lang)
         yield ArticleStruct(
             id=article.id,
-            title=article.title,
-            description=article.description,
-            content=article.content,
+            title=content.title,
+            description=content.description,
+            content=content.content,
             published_at=article.published_at,
             slug=article.slug,
             author=article.author,
-            tags=article.tags.all().values_list('name', flat=True),
-            cover_image_url=article.image,
+            tags=content.tags.all().values_list('name', flat=True),
+            cover_image_url=content.image or article.image,
             category_name=article.category.name,
             related_categories_ids=article.categories.all().values_list('id', flat=True)
         )
@@ -46,9 +51,13 @@ def get_home_page_context(request):
 
     # Main Post Details
     last_post = Article.objects.order_by('-published_at').first()
-    context['last_post_title'] = last_post and last_post.title
-    context['last_post_body'] = last_post and last_post.description
-    context['last_post_image'] = last_post and last_post.image.url
+    last_post_content = last_post and last_post.content.filter(language=get_language()).first()
+    context['last_post_title'] = last_post and last_post_content.title
+    context['last_post_body'] = last_post and last_post_content.description
+    context['last_post_image'] = (
+            last_post and last_post_content.image and last_post_content.image.url
+            or last_post and last_post.image.url
+    )
     context['last_post_slug'] = last_post and last_post.slug
 
     # All news ordered by published time
