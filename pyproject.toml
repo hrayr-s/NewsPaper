@@ -29,6 +29,12 @@ django-mptt = "^0.16.0"
 django-otp = "^1.3.0"
 qrcode = "^7.4.2"
 
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+django-debug-toolbar = "^4.3.0"
+
 [tool.poetry.extras]
 live = ["gunicorn"]
 postgres = ["psycopg2"]

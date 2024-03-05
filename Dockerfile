@@ -13,3 +13,4 @@ RUN python -m poetry install --sync
 FROM base as local
 # app repo host directory should be mounted here on run
 RUN echo "-> local"
+RUN python -m poetry install --sync --with dev
