@@ -2,7 +2,7 @@ name: Deploy NewsPaper Prod
 
 on:
   tags:
-    - *
+    - 1.*
 
 defaults:
   run:
