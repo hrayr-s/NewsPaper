@@ -23,7 +23,7 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = [ArticleContentInline]
 
     def save_model(self, request, obj, form, change):
-        obj.creator = request.user
+        obj.author = request.user
         return super(ArticleAdmin, self).save_model(request=request, obj=obj, form=form, change=change)
 
 
