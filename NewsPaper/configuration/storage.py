@@ -14,7 +14,7 @@ class StorageConfig:
     }
 
     STATIC_URL = '/static/'
-    # STATIC_ROOT = base_dir() / 'static'
+    STATIC_ROOT = base_dir() / 'collected_static'
     STATICFILES_DIRS = [
         base_dir() / "static",
     ]
