@@ -26,21 +26,7 @@ def _get_featured_articles(*, count=2):
     ).prefetch_related(
         'content', 'tags', 'categories', 'category__content'
     ).order_by('-featured_at', '-published_at')[:count]:
-        content = list(content for content in article.content.all() if content.language == lang)[0]
-        category_name = list(category.name for category in article.category.content.all() if category.language == lang)
-        yield ArticleStruct(
-            id=article.id,
-            title=content.title,
-            description=content.description,
-            content=content.content,
-            published_at=article.published_at,
-            slug=article.slug,
-            author=article.author,
-            tags=content.tags.all().values_list('name', flat=True),
-            cover_image_url=content.image or article.image,
-            category_name=article.category.name,
-            related_categories_ids=article.categories.all().values_list('id', flat=True)
-        )
+        yield ArticleStruct.from_article_model(article=article, lang=lang)
 
 
 def get_home_page_context(request):

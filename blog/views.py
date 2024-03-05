@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.utils.translation import get_language
 from django.views.generic import ListView, DetailView
 
 from blog.models import Article, Category
 from blog.services.page_context import get_home_page_context
+from blog.services.structures import Article as ArticleStruct
 
 DEFAULT_ARTICLES_PER_PAGE = 10
 
@@ -63,3 +65,7 @@ class UserArticlesView(ListView):
 class ArticleDetailView(DetailView):
     template_name = 'blog/ArticleDetail.html'
     model = Article
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        return ArticleStruct.from_article_model(article=obj, lang=get_language())
