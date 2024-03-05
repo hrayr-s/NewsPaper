@@ -447,6 +447,23 @@ django-js-asset = "*"
 tests = ["coverage[toml]", "mock-django"]
 
 [[package]]
+name = "django-otp"
+version = "1.3.0"
+description = "A pluggable framework for adding two-factor authentication to Django using one-time passwords."
+optional = false
+python-versions = ">=3.7"
+files = [
+    { file = "django_otp-1.3.0-py3-none-any.whl", hash = "sha256:5277731bc05b6cdbf96aa84ac46018e30ed5fb248086053b0146f925de059060" },
+    { file = "django_otp-1.3.0.tar.gz", hash = "sha256:8f4156a3c14ce2aaa31379385eadf388925cd50fc4b5d20a3b944f454c98ff7c" },
+]
+
+[package.dependencies]
+django = ">=3.2"
+
+[package.extras]
+qrcode = ["qrcode"]
+
+[[package]]
 name = "django-redis"
 version = "5.4.0"
 description = "Full featured redis cache backend for Django."
@@ -1013,6 +1030,17 @@ files = [
 ]
 
 [[package]]
+name = "pypng"
+version = "0.20220715.0"
+description = "Pure Python library for saving and loading PNG images"
+optional = false
+python-versions = "*"
+files = [
+    { file = "pypng-0.20220715.0-py3-none-any.whl", hash = "sha256:4a43e969b8f5aaafb2a415536c1a8ec7e341cd6a3f957fd5b5f32a4cfeed902c" },
+    { file = "pypng-0.20220715.0.tar.gz", hash = "sha256:739c433ba96f078315de54c0db975aee537cbc3e1d0ae4ed9aab0ca1e427e2c1" },
+]
+
+[[package]]
 name = "pyproject-hooks"
 version = "1.0.0"
 description = "Wrappers to call pyproject.toml-based build backend hooks."
@@ -1033,6 +1061,29 @@ files = [
     {file = "pywin32-ctypes-0.2.2.tar.gz", hash = "sha256:3426e063bdd5fd4df74a14fa3cf80a0b42845a87e1d1e81f6549f9daec593a60"},
     {file = "pywin32_ctypes-0.2.2-py3-none-any.whl", hash = "sha256:bf490a1a709baf35d688fe0ecf980ed4de11d2b3e37b51e5442587a75d9957e7"},
 ]
+
+[[package]]
+name = "qrcode"
+version = "7.4.2"
+description = "QR Code image generator"
+optional = false
+python-versions = ">=3.7"
+files = [
+    { file = "qrcode-7.4.2-py3-none-any.whl", hash = "sha256:581dca7a029bcb2deef5d01068e39093e80ef00b4a61098a2182eac59d01643a" },
+    { file = "qrcode-7.4.2.tar.gz", hash = "sha256:9dd969454827e127dbd93696b20747239e6d540e082937c90f14ac95b30f5845" },
+]
+
+[package.dependencies]
+colorama = { version = "*", markers = "platform_system == \"Windows\"" }
+pypng = "*"
+typing-extensions = "*"
+
+[package.extras]
+all = ["pillow (>=9.1.0)", "pytest", "pytest-cov", "tox", "zest.releaser[recommended]"]
+dev = ["pytest", "pytest-cov", "tox"]
+maintainer = ["zest.releaser[recommended]"]
+pil = ["pillow (>=9.1.0)"]
+test = ["coverage", "pytest"]
 
 [[package]]
 name = "rapidfuzz"
@@ -1254,6 +1305,17 @@ files = [
 ]
 
 [[package]]
+name = "typing-extensions"
+version = "4.10.0"
+description = "Backported and Experimental Type Hints for Python 3.8+"
+optional = false
+python-versions = ">=3.8"
+files = [
+    { file = "typing_extensions-4.10.0-py3-none-any.whl", hash = "sha256:69b1a937c3a517342112fb4c6df7e72fc39a38e7891a5730ed4985b5214b5475" },
+    { file = "typing_extensions-4.10.0.tar.gz", hash = "sha256:b0abd7c89e8fb96f98db18d86106ff1d90ab692004eb746cf6eda2682f91b3cb" },
+]
+
+[[package]]
 name = "tzdata"
 version = "2024.1"
 description = "Provider of IANA time zone data"
@@ -1430,4 +1492,4 @@ live = ["psycopg2", "uwsgi"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "12bf9ee31a2b8d0b5b4d19c045a85c0e1b8ecf50d14f26c8bdd40eb6fac6be8f"
+content-hash = "c0c55097671a5f2a8bcb8b828a2a8fea86b3d04c8f7150c9e9b970e85369b50a"
