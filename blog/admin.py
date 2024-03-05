@@ -2,7 +2,7 @@ from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 
 from blog.forms import ArticleForm
-from blog.models import Category, Article, ArticleContent, CategoryContent
+from blog.models import Category, Article, ArticleContent, CategoryContent, Tag
 
 
 class ArticleContentInline(admin.StackedInline):
@@ -42,3 +42,4 @@ class CategoryAdmin(MPTTModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Tag)
