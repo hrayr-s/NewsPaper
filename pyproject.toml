@@ -30,7 +30,8 @@ django-otp = "^1.3.0"
 qrcode = "^7.4.2"
 
 [tool.poetry.extras]
-live = ["gunicorn", "psycopg2"]
+live = ["gunicorn"]
+postgres = ["psycopg2"]
 
 [build-system]
 requires = ["poetry-core"]
