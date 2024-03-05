@@ -21,7 +21,6 @@ class ArticleAdmin(admin.ModelAdmin):
     date_hierarchy = 'published_at'
     form = ArticleForm
     inlines = [ArticleContentInline]
-    prepopulated_fields = {'slug': ('slug',), }
 
     def save_model(self, request, obj, form, change):
         obj.creator = request.user
