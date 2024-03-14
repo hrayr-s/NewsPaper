@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
@@ -55,7 +54,7 @@ class Article(models.Model):
     categories = models.ManyToManyField(
         Category, related_name='articles', verbose_name='Related Categories', blank=True)
 
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

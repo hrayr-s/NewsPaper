@@ -16,7 +16,7 @@ class DjangoConfig:
             # 'django_otp',
             # 'django_otp.plugins.otp_totp',
             # 'django_otp.plugins.otp_static',
-
+            'accounts',
             'tinymce',
             'blog',
         ]
@@ -46,6 +46,7 @@ class DjangoConfig:
 
     WSGI_APPLICATION = 'NewsPaper.wsgi.application'
 
+    AUTH_USER_MODEL = 'accounts.User'
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
