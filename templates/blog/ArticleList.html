@@ -1,9 +1,11 @@
 {% extends 'layouts/base.html' %}
-{% block meta_title %}{{ category_title }}{% endblock %}
+{% load i18n %}
+{% block page_title %}{% translate 'Articles in' %}{{ page.title }}{% endblock %}
 {% block main %}
-  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row Category-Title flex-row" style="background-image: url('{{ category_image }}');">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark row Category-Title flex-row"
+         style="background-image: url('{{ page.image }}');">
     <div class="col-sm-10" >
-      <h1 class="display-4 font-italic">{{ category_title }}</h1>
+        <h1 class="display-4 font-italic">{{ page.title }}</h1>
     </div>
   </div>
 
@@ -12,14 +14,21 @@
     <div class="col-md-12">
         {% for article in page_obj %}
       <article class="blog-post">
-        <h2 class="blog-post-title"><a href="{% url 'ArticleDetailView' article.slug %}">{{ article.title }}</a></h2>
-        <p class="blog-post-meta"><a class="p-2 link-secondary" href="{% url 'CategoryArticlePage' article.category.slug %}">{{ article.category.title }}</a>{{ article.published_at|date:'F j, Y' }} by <a href="{% url 'UserArticlePage' article.creator.username %}">{{ article.creator.username }}</a></p>
+          <h2 class="blog-post-title"><a href="{% url 'blog:ArticleDetailView' article.slug %}">{{ article.title }}</a>
+          </h2>
+          <p class="blog-post-meta"><a class="p-2 link-secondary"
+                                       href="{% url 'blog:CategoryArticlePage' article.category.slug %}">{{ article.category.title }}</a>{{ article.published_at|date:'F j, Y' }}
+              by <a href="{% url 'blog:UserArticlePage' article.author %}">{{ article.author }}</a></p>
           {{ article.content|striptags }}
       </article><!-- /.blog-post -->
         {% endfor %}
       <nav class="blog-pagination" aria-label="Pagination">
-        <a class="btn btn-outline-primary{% if not page_obj.has_next %} disabled{% endif %}" {% if not page_obj.has_next %} aria-disabled="true" tabindex="-1"{% else %}href="/?page={{ page_obj.next_page_number }}"{% endif %}>Older</a>
-        <a class="btn btn-outline-secondary{% if not page_obj.has_previous %} disabled{% endif %}" {% if not page_obj.has_previous %} aria-disabled="true" tabindex="-1"{% else %}href="/?page={{ page_obj.previous_page_number }}"{% endif %}>Newer</a>
+          <a class="btn btn-outline-primary{% if not page_obj.has_next %} disabled{% endif %}"
+                  {% if not page_obj.has_next %} aria-disabled="true" tabindex="-1"
+             {% else %}href="?page={{ page_obj.next_page_number }}"{% endif %}>{% translate 'Older' %}</a>
+          <a class="btn btn-outline-secondary{% if not page_obj.has_previous %} disabled{% endif %}"
+                  {% if not page_obj.has_previous %} aria-disabled="true" tabindex="-1"
+             {% else %}href="?page={{ page_obj.previous_page_number }}"{% endif %}>{% translate 'Newer' %}</a>
       </nav>
 
     </div>

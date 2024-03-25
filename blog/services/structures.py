@@ -10,7 +10,23 @@ from blog.models import Article as ArticleModel, Category as CategoryModel
 
 
 @dataclasses.dataclass
+class Page(object):
+    title: str
+    lang: str
+    image: typing.Optional[str] = None
+
+    @classmethod
+    def from_user_obj(cls, *, user):
+        return cls(
+            title=user.username,
+            lang=get_language(),
+            image=''
+        )
+
+
+@dataclasses.dataclass
 class Category(object):
+    id: int
     title: str
     slug: str
     lang: str
@@ -21,6 +37,7 @@ class Category(object):
         lang = lang or get_language()
         content = list(content for content in category.content.all() if content.language == lang)[0]
         return Category(
+            id=category.id,
             title=content.title,
             slug=category.slug,
             lang=lang,

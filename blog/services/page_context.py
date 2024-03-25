@@ -1,32 +1,31 @@
 import datetime
+import typing
 
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import get_language
 
 from blog.models import Article, Category
-from blog.services.structures import Article as ArticleStruct
+from blog.services.generators import article_struct_from_queryset, category_struct_from_queryset
+from blog.services.structures import Article as ArticleStruct, Category as CategoryStruct
 
 
-def _get_next_featured_category(count=2):
-    for category in Category.objects.annotate(
+def _get_next_featured_category(count=2) -> typing.Generator[CategoryStruct, None, None]:
+    return category_struct_from_queryset(Category.objects.annotate(
             count=models.Count(
                 'articles',
                 filter=models.Q(main_articles__published_at__gte=timezone.now() - datetime.timedelta(days=7)))
-    ).order_by('-count')[:count]:
-        yield category
+    ).order_by('-count')[:count])
 
 
-def _get_featured_articles(*, count=2):
-    lang = get_language()
-    for article in Article.objects.filter(
+def _get_featured_articles(*, count=2) -> typing.Generator[ArticleStruct, None, None]:
+    return article_struct_from_queryset(Article.objects.filter(
             featured=True
     ).select_related(
         'category'
     ).prefetch_related(
         'content', 'content__tags', 'categories', 'category__content'
-    ).order_by('-featured_at', '-published_at')[:count]:
-        yield ArticleStruct.from_article_model(article=article, lang=lang)
+    ).order_by('-featured_at', '-published_at')[:count])
 
 
 def get_home_page_context(request):

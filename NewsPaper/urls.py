@@ -26,7 +26,7 @@ from NewsPaper.choices import EnvChoices
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
-    path('', include('blog.urls')),
+    path('', include('blog.urls', namespace='blog')),
 ]
 
 if settings.ENVIRONMENT == EnvChoices.local:
