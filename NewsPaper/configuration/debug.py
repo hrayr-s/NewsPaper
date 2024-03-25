@@ -29,3 +29,27 @@ class DebugConfig:
         'debug_toolbar.panels.redirects.RedirectsPanel',
         'debug_toolbar.panels.profiling.ProfilingPanel',
     ]
+
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {
+                'format': '{levelname} {asctime} {module} {message}',
+                'style': '{',
+            },
+        },
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+            },
+        },
+    }
