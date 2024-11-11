@@ -1,0 +1,174 @@
+[
+  {
+    "model": "blog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "автомобили",
+      "language": "ru"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "Automotive",
+      "language": "en"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "Ավտոմեքենա",
+      "language": "hy"
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 1,
+    "fields": {
+      "slug": "automotive",
+      "image": "categories/automotive.jpg",
+      "parent": null,
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 1,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.category",
+    "pk": 2,
+    "fields": {
+      "slug": "house",
+      "image": "categories/house.jpg",
+      "parent": null,
+      "lft": 1,
+      "rght": 2,
+      "tree_id": 2,
+      "level": 0
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "language": "en",
+      "title": "Automotive",
+      "image": ""
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "language": "hy",
+      "title": "Ավտոմեքենաներ",
+      "image": ""
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "language": "ru",
+      "title": "Автомобили",
+      "image": "categories/automotive_2uxo7fZ.jpg"
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "language": "en",
+      "title": "House",
+      "image": ""
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 5,
+    "fields": {
+      "category": 2,
+      "language": "hy",
+      "title": "Տուն",
+      "image": ""
+    }
+  },
+  {
+    "model": "blog.categorycontent",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "language": "ru",
+      "title": "Дом",
+      "image": ""
+    }
+  },
+  {
+    "model": "blog.article",
+    "pk": 2,
+    "fields": {
+      "slug": "exploring-the-future-new-technologies-revolutioni",
+      "category": 1,
+      "author": 1,
+      "created_at": "2024-03-05T19:41:22.488Z",
+      "updated_at": "2024-03-05T19:41:22.489Z",
+      "published": true,
+      "published_at": "2024-03-05T19:41:22.488Z",
+      "featured": true,
+      "featured_at": "2024-03-05T19:41:22.488Z",
+      "image": "articles/automotive_Sie2cR0.jpg",
+      "categories": []
+    }
+  },
+  {
+    "model": "blog.articlecontent",
+    "pk": 4,
+    "fields": {
+      "article": 2,
+      "language": "en",
+      "title": "Exploring the Future: New Technologies Revolutionizing the Automotive Industry",
+      "description": "Innovation in the automotive industry has always been at the forefront of technological advancements.",
+      "image": "",
+      "content": "<p>Innovation in the automotive industry has always been at the forefront of technological advancements. From the early days of the Model T to the modern era of electric vehicles and self-driving cars, the evolution of automotive technology continues to reshape the way we drive, commute, and interact with vehicles. In this article, we delve into some of the latest technologies that are revolutionizing the automotive landscape.</p>\r\n<p><strong>1. Electric Vehicles (EVs) Surge Ahead</strong></p>\r\n<p>One of the most significant shifts in recent years is the rise of electric vehicles (EVs). With concerns about climate change and the need for sustainable transportation, major automakers are investing heavily in EV technology. Companies like Tesla, Rivian, and Nissan are leading the charge with models that offer impressive range, fast-charging capabilities, and sleek designs.</p>\r\n<p>Charging infrastructure is also rapidly expanding, making it easier for EV owners to find charging stations on long journeys. The convenience and environmental benefits of EVs are driving more consumers to consider making the switch from traditional gasoline-powered vehicles.</p>\r\n<p><strong>2. Autonomous Driving: The Future of Mobility</strong></p>\r\n<p>Self-driving cars, once a concept relegated to science fiction, are now becoming a reality. Companies such as Waymo, Cruise, and Tesla are at the forefront of developing autonomous driving technology. These vehicles use a combination of sensors, cameras, and artificial intelligence to navigate roads, interpret traffic signs, and make split-second decisions.</p>\r\n<p>While fully autonomous cars are not yet commonplace on our roads, we are seeing the gradual introduction of advanced driver-assistance systems (ADAS). Features such as adaptive cruise control, lane-keeping assist, and automatic emergency braking are making driving safer and more comfortable.</p>\r\n<p><strong>3. Connectivity and Smart Vehicles</strong></p>\r\n<p>The era of the \"connected car\" is upon us, where vehicles are equipped with internet connectivity and a range of smart features. From in-car infotainment systems to remote start and vehicle diagnostics, these technologies are enhancing the driving experience.</p>\r\n<p>Moreover, the integration of vehicle-to-everything (V2X) communication allows cars to communicate with each other and with traffic infrastructure. This enables real-time data sharing on traffic conditions, road hazards, and more, leading to improved safety and efficiency on the roads.</p>\r\n<p><strong>4. Advanced Materials and Lightweighting</strong></p>\r\n<p>Efforts to make vehicles more fuel-efficient and environmentally friendly have led to the development of advanced materials and lightweighting techniques. Automakers are using materials such as carbon fiber, aluminum, and high-strength steel to reduce weight without compromising on safety and performance.</p>\r\n<p>Lighter vehicles consume less fuel or electricity, resulting in lower emissions and operating costs. These materials also contribute to better handling and acceleration, offering a more dynamic driving experience for enthusiasts.</p>\r\n<p><strong>Conclusion</strong></p>\r\n<p>As we look ahead, the automotive industry is poised for further transformation with new technologies shaping the future of mobility. From electric vehicles to autonomous driving and smart connectivity, these innovations are not only changing the way we drive but also paving the way for a more sustainable and efficient transportation ecosystem.</p>\r\n<p>Whether you're a tech enthusiast, an environmental advocate, or simply a car lover, the advancements in automotive technology offer something to be excited about. Buckle up for the ride as we witness the next chapter in the evolution of the automobile.</p>",
+      "tags": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "blog.articlecontent",
+    "pk": 5,
+    "fields": {
+      "article": 2,
+      "language": "ru",
+      "title": "Исследование Будущего: Новые Технологии, Революционизирующие Автомобильную Индустрию",
+      "description": "Инновации в автомобильной промышленности всегда находились во главе технологических достижений.",
+      "image": "",
+      "content": "<p>Инновации в автомобильной промышленности всегда находились во главе технологических достижений. С ранних дней Model T до современной эры электромобилей и автомобилей с автопилотом, эволюция автомобильной технологии продолжает пересматривать наш способ вождения, коммутирования и взаимодействия с автомобилями. В этой статье мы углубимся в некоторые из последних технологий, которые революционизируют автомобильный ландшафт.</p>\r\n<p><strong>1. Электромобили (ЭМ): Впереди волнового</strong></p>\r\n<p>Одним из самых значительных сдвигов в последние годы является взлет электромобилей (ЭМ). С учетом опасений по поводу изменения климата и необходимости устойчивого транспорта крупные автопроизводители инвестируют крупные средства в технологию ЭМ. Компании, такие как Tesla, Rivian и Nissan, лидируют с моделями, которые предлагают впечатляющий пробег, быструю зарядку и элегантный дизайн.</p>\r\n<p>Инфраструктура для зарядки также быстро расширяется, что делает более простым для владельцев ЭМ находить зарядные станции во время длительных поездок. Удобство и экологические преимущества ЭМ заставляют все больше потребителей рассматривать возможность перехода с традиционных автомобилей с бензиновыми двигателями.</p>\r\n<p><strong>2. Автономное Вождение: Будущее Мобильности</strong></p>\r\n<p>Самоуправляемые автомобили, когда-то концепция, отложенная в научную фантастику, теперь становятся реальностью. Компании, такие как Waymo, Cruise и Tesla, находятся во главе разработки технологии автономного вождения. Эти автомобили используют комбинацию датчиков, камер и искусственного интеллекта для навигации по дорогам, интерпретации дорожных знаков и принятия мгновенных решений.</p>\r\n<p>Хотя полностью автономные автомобили еще не являются обычным явлением на наших дорогах, мы наблюдаем постепенное внедрение системы продвинутой помощи водителю (ADAS). Функции, такие как адаптивный круиз-контроль, помощь в удержании полосы и автоматическое экстренное торможение, делают вождение более безопасным и комфортным.</p>\r\n<p><strong>3. Связность и Смарт-Автомобили</strong></p>\r\n<p>Эпоха \"связанного автомобиля\" наступила, когда автомобили оснащены интернет-связью и рядом умных функций. От информационно-развлекательных систем в автомобиле до дистанционного запуска и диагностики автомобиля, эти технологии улучшают опыт вождения.</p>\r\n<p>Более того, интеграция коммуникации между автомобилями и всем, что с ними связано (V2X), позволяет автомобилям обмениваться данными в реальном времени о состоянии дорожного движения, опасных дорожных ситуациях и другом, что приводит к улучшению безопасности и эффективности на дорогах.</p>\r\n<p><strong>4. Продвинутые Материалы и Снижение Веса</strong></p>\r\n<p>Усилия по созданию более топливоэффективных и экологически чистых автомобилей привели к разработке продвинутых материалов и техник снижения веса. Автопроизводители используют материалы, такие как углеродное волокно, алюминий и высокопрочную сталь, для снижения веса без ущерба для безопасности и производительности.</p>\r\n<p>Легкие автомобили потребляют меньше топлива или электричества, что приводит к снижению выбросов и операционных расходов. Эти материалы также способствуют лучшей управляемости и ускорению, предлагая более динамичный опыт вождения для энтузиастов.</p>\r\n<p><strong>Заключение</strong></p>\r\n<p>По мере того, как мы смотрим вперед, автомобильная промышленность готовится к дальнейшей трансформации с новыми технологиями, формирующими будущее мобильности. От электромобилей до автономного вождения и умной связности эти инновации не только меняют наш способ вождения, но и открывают путь к более устойчивой и эффективной транспортной экосистеме.</p>\r\n<p>Будь то технический энтузиаст, защитник окружающей среды или просто любитель автомобилей, достижения в автомобильной технологии предлагают что-то, чему стоит порадоваться. Приготовьтесь к путешествию, поскольку мы станем свидетелями следующей главы в развитии автомобиля.</p>",
+      "tags": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "blog.articlecontent",
+    "pk": 6,
+    "fields": {
+      "article": 2,
+      "language": "hy",
+      "title": "Առաջին Վերաբերյալ: Թվարկությունները Վերածննդելու Ավտոմեքենայական Տեխնոլոգիան  Ավտոմեքենայի ա",
+      "description": "Ավտոմեքենայի արտաքին նորացումը մշակումների առաջացումում միշտ է լինում տեխնոլոգիական թեխնոլոգիաների առաջարկությունների առաջացումով",
+      "image": "",
+      "content": "<p>Ավտոմեքենայի արտաքին նորացումը մշակումների առաջացումում միշտ է լինում տեխնոլոգիական թեխնոլոգիաների առաջարկությունների առաջացումով։ Սկզբից մինչև Model T-ի շարժումների արդյունքում և էլեկտրական մեքենաների և ինքնական վարումների ժամանակակից երկրորդ տարիներից արդյունքում, ավտոմեքենայի տեխնոլոգիայի զարգացումը շեփորակում է մենք վարվելու, պալատավորվելու եւ կազմակերպելու ենթարկությունը մեր վավերացնում է այն ձայնավորներին, որոնք մեզ զուգարանավայրում վարում, աշխարհաքաղաքականությունը ու ավտոմեքենաների հետ կապված մշակությունը։ Այս հոդվածում մենք ծառայություն ունենք մի քանի վերջին տեխնոլոգիաների, որոնք ռեվոլյուցիոնալիզացնում են ավտոմեքենայի տեսարանը։</p>\r\n<p><strong>1. Էլեկտրական Մեքենաներ (ԷՄ): Բարեկեցուցիչների Դէպի</strong></p>\r\n<p>Վերջին տարեկաններում մեծացման համար ամենակարևոր փոփոխություններից մեկը է էլեկտրական մեքենաների (ԷՄ) բարեկեցուցիչությունը: Գոյությունը ավտոմեքենայի մասնակցության և կառավարման նախաձեռնությունների մասն է, ավտոմեքենաների նավահանգստությունն ու գովազդը: Դաշտավորումը ունեցած ընկերություններն ավտոմեքենայի նավահանգստությունն առաջացնում են մենք հայտնի արագ ընկերության, առաջին չափի զլայինության և վերջին դիմակահարության մոդելներով, որոնց հաշվին ավտոմեքենայի մեծածախ ճանապարհերը, արագ լրացրությունը և հանգստավորվող դիմակահարությունը։</p>\r\n<p><strong>2. Ավտոմաքսիմալ Վանքակներ: Մոբիլության Ապահովում</strong></p>\r\n<p>Ինքնավալության ավտոմեքենաները, առավել նախատեսված այլևս գիտական հետազոտություն, այժմ դառնալու են իրենց առաջին ընթացքի համար։ Կազմակերպումները, ինչպես Waymo, Cruise և Tesla, առաջարկում են ավտոմաքսիմալ վանքակների թեխնոլոգիան շփվում հայաստանում։ Այս մեքենաները օգտագործում են համակարգչային միջավայրերի, կամերանների եւ կամերային ինտերպրետացիայի հատուցմամբ ավտոմաքսիմալ վանքակները, դադարեցնելով ճանապարհերին, դիտումներին հետագա արտացոլվելու, որպեսզի բարեկեցուցիչներին տալիս մեծացում ու գովազդը։</p>\r\n<p><strong>3. Միացյալություն եւ Սմարտ-Ավտոմեքենաներ</strong></p>\r\n<p>\"Միացյալ մեքենա\" առաքում է, երբ ավտոմեքենաները ընդարձակվում են ինտերնետային կապով և շատերի հետ միասին։ Ստացում էինք ավտոմեքենայի ինֆորմացիոնալ-հանդես սպասումներից մինչև վազի ավտոմաքսիմալ վանքակների եւ մետրանովրագույն վանքակների կայանքի մասնակցությունը։ Այսպես, մարդկանց ավտոմեքենաները կարող են նավահանգստել իրենց անմահությունը եւ հարապատում արդյունքի արդյունքը ճանապարհային պայմաններում, ճանաչելիությունն ու ավտոմաքսիմալ բարի պատրաստությունը։</p>\r\n<p><strong>4. Բարեկեցության Տեսարժանություն և Լեռնագրային Օժանդակություն</strong></p>\r\n<p>Ունեցողական ավտոմեքենաների արտաքին նորացումները և լեռնագրային մեթոդները արագ էներգության արարագությունների ու շարժության համար դեռևս պահանջվում են: Ավտոմեքենական արտաքին նորացումները օգտագործում են այնպիսի միջոցներ, ինչպես որպես ամենաստեղծածելի ինչպես կարճավոր աճուցումները, կամերանների եւ ամերիկային կառավարության նախաձեռնությունները: Այս ավտոմեքենաները պատմում են, որ ստեղծագործական ավտոմեքենային ներկայացումը եւ վերաբերումը սահմանափակում է ավտոմեքենայի կարճաժամանակավորության եւ պայթերումը ավտոմաքսիմալ էներգիային է լարած։ Այս ավտոմեքենաները նաև գործում են լարավում արտաքին ավտոմաքսիմալ էներգիայի մեծացումը, բարելավման առաքման հաճության մասնակցությունը, ապահովումը եւ հետաքրքրության արարությունը։</p>\r\n<p><strong>Բարի կարողությունը Ավտոմեքենայի արտաքին նորացումների առաջացման համար</strong></p>\r\n<p>այսպիսի հոդվածներով, ավտոմեքենայի տեխնոլոգիան չի սահմանվում միայն մեկնարկումներով: Եթե ​​դուք մտածում եք, որ դուք կարող եք նորացնել ավտոմեքենայի արտաքին ամենավաճառված բազմաթիվ ամենաբարեկեցություն ու բարեկեցություն, ապա դուք պետք է պատրաստվեք ավտոմեքենայի կառավարման առաջնություններին։ Երբ մարդկանց տեխնոլոգիայի եւ համակարգչային այգի մշակումը միասին հավատում են իրենց կոչումներին, ավտոմեքենաները համարվում են ավելի արագ եւ արագ առաքման տեսարժանությամբ։ Ավելին, դրանք առաջացնում են մարդկանց ավելի կարճավոր աճուցումները ու ավելի արագ գանգատները, որոնք հասանելի են ավելի բարեկեցության վայրերում։</p>",
+      "tags": [
+        3
+      ]
+    }
+  }
+]

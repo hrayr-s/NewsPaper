@@ -35,6 +35,7 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.3.0"
 
+# e.g `poetry install --with dev -E postgres
 [tool.poetry.extras]
 live = ["gunicorn"]
 postgres = ["psycopg2"]
