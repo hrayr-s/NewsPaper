@@ -108,3 +108,21 @@ Open browser and go with URL http://127.0.0.1:8000/
 ## Public Server deployment
 
 The instructions for deployment along with nginx server can be found in the internet.
+
+# Locale
+
+## Language configuration
+
+You can configure languages using environment variables or .env variables.
+To set default langauge use variable `DEFAULT_LANGUAGE_CODE`.
+Note! The value from `DEFAULT_LANGUAGE_CODE` variable must be present in Languages list as language code.
+
+Langauge configuration is a pair of language code and the name on that language (or whatever you want it to be
+displayed).
+
+Example of such configuration is present below:
+
+```dotenv
+LANGUAGES_LIST="ru|Русский,hy|Հայերեն,en|English"
+DEFAULT_LANGUAGE_CODE=ru
+```
