@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext_lazy
+from django.utils.translation import gettext_lazy, gettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 from tinymce.models import HTMLField
 
@@ -20,7 +20,7 @@ class Category(MPTTModel):
         return self.slug
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = gettext_lazy('Categories')
 
 
 class CategoryContent(models.Model):
@@ -36,8 +36,8 @@ class CategoryContent(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = 'Categories Contents'
-        verbose_name = 'Category Content'
+        verbose_name_plural = gettext_lazy('Categories Contents')
+        verbose_name = gettext_lazy('Category Content')
         unique_together = ('category', 'language')
 
 
@@ -47,12 +47,12 @@ class Article(models.Model):
         Category,
         related_name='main_articles',
         on_delete=models.CASCADE,
-        verbose_name='Main Category',
+        verbose_name=gettext_lazy('Main Category'),
         null=False,
         blank=False
     )
     categories = models.ManyToManyField(
-        Category, related_name='articles', verbose_name='Related Categories', blank=True)
+        Category, related_name='articles', verbose_name=gettext_lazy('Related Categories'), blank=True)
 
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -76,7 +76,7 @@ class Article(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.published and self.published_at is not None:
-            raise ValueError('Cannot un-publish article after published!')
+            raise ValueError(_('Cannot un-publish article after published!'))
         if self.published and self.published_at is None:
             self.published_at = timezone.now()
         if self.featured and self.featured_at is None:
@@ -97,5 +97,5 @@ class ArticleContent(models.Model):
     content = HTMLField()
 
     class Meta:
-        verbose_name = 'Articles Contents'
+        verbose_name = gettext_lazy('Articles Contents')
         unique_together = ('article', 'language')

@@ -7,7 +7,7 @@ class FrontendConfig:
     TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [os.path.join(base_dir(), 'templates')]
+            'DIRS': [os.path.join(base_dir(), 'templates'), 'templates']
             ,
             'APP_DIRS': True,
             'OPTIONS': {
