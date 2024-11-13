@@ -10,6 +10,9 @@ class Tag(models.Model):
     name = models.CharField(max_length=25, unique=True, db_index=True, verbose_name=gettext_lazy("Tag"))
     language = models.CharField(max_length=4, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
 
+    def __str__(self):
+        return f'{self.name} ({self.language})'
+
 
 class Category(MPTTModel):
     slug = models.SlugField()
