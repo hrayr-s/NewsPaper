@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 
@@ -8,8 +9,14 @@ from blog.models import Category, Article, ArticleContent, CategoryContent, Tag
 class ArticleContentInline(admin.StackedInline):
     model = ArticleContent
     extra = 0
-    min_num = 3
-    max_num = 3
+
+    @property
+    def min_num(self):
+        return len(settings.LANGUAGES)
+
+    @property
+    def max_num(self):
+        return len(settings.LANGUAGES)
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -31,8 +38,14 @@ class ArticleAdmin(admin.ModelAdmin):
 class CategoryContentInline(admin.StackedInline):
     model = CategoryContent
     extra = 0
-    min_num = 3
-    max_num = 3
+
+    @property
+    def min_num(self):
+        return len(settings.LANGUAGES)
+
+    @property
+    def max_num(self):
+        return len(settings.LANGUAGES)
 
 
 class CategoryAdmin(MPTTModelAdmin):
