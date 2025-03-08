@@ -35,6 +35,7 @@ class LocaleConfig:
 
     USE_L10N = True
     LOCALE_PATHS = [
+        'locale',
         os.path.join(base_dir(), 'locale')
     ]
 

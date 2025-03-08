@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy, gettext as _
 from mptt.models import MPTTModel, TreeForeignKey
 from tinymce.models import HTMLField
 
+from accounts.models import Publisher
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=25, unique=True, db_index=True, verbose_name=gettext_lazy("Tag"))
@@ -57,7 +59,7 @@ class Article(models.Model):
     categories = models.ManyToManyField(
         Category, related_name='articles', verbose_name=gettext_lazy('Related Categories'), blank=True)
 
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    author = models.ForeignKey(Publisher, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

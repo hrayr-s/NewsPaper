@@ -1,3 +1,6 @@
+from NewsPaper.choices import EnvChoices
+
+
 class DjangoConfig:
     ALLOWED_HOSTS = []
     DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -20,6 +23,9 @@ class DjangoConfig:
             'tinymce',
             'blog',
         ]
+
+        if self.ENVIRONMENT == EnvChoices.local:
+            app_list.append('rosetta')
         if self.DEBUG:
             app_list.append('debug_toolbar')
 
@@ -30,6 +36,7 @@ class DjangoConfig:
         middleware_list = [
             'django.middleware.security.SecurityMiddleware',
             'django.contrib.sessions.middleware.SessionMiddleware',
+            'django.middleware.locale.LocaleMiddleware',  # Add LocaleMiddleware here
             'django.middleware.common.CommonMiddleware',
             'django.middleware.csrf.CsrfViewMiddleware',
             'django.contrib.auth.middleware.AuthenticationMiddleware',
