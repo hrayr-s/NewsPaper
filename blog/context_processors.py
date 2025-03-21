@@ -1,4 +1,4 @@
-from blog.models import Category
+from blog.models import CategoryContent
 
 
 def categories(request):
@@ -6,7 +6,11 @@ def categories(request):
     Adds categories to the template renderer context.
     Return a list of 'Category' model objects
     """
-    category_list = Category.objects.filter(level=1).annotate().prefetch_related('content').order_by('content__title')
+    category_list = CategoryContent.objects.filter(
+        category__parent__isnull=True,
+        language=request.LANGUAGE_CODE,
+    ).annotate().select_related('category').order_by('title')
+
     return {
         'categories': category_list,
     }
