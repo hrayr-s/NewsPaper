@@ -19,8 +19,10 @@ class DjangoConfig:
             # 'django_otp',
             # 'django_otp.plugins.otp_totp',
             # 'django_otp.plugins.otp_static',
+
+            'django_ckeditor_5',
+
             'accounts',
-            'tinymce',
             'blog',
         ]
 

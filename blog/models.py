@@ -2,10 +2,10 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy, gettext as _
+from django_ckeditor_5.fields import CKEditor5Field
 from mptt.models import MPTTModel, TreeForeignKey
-from tinymce.models import HTMLField
 
-from accounts.models import Publisher
+from accounts.models import User
 
 
 class Tag(models.Model):
@@ -40,6 +40,8 @@ class CategoryContent(models.Model):
         help_text=gettext_lazy("Language specific image. If not set category default image will be taken.")
     )
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name_plural = gettext_lazy('Categories Contents')
         verbose_name = gettext_lazy('Category Content')
@@ -59,7 +61,7 @@ class Article(models.Model):
     categories = models.ManyToManyField(
         Category, related_name='articles', verbose_name=gettext_lazy('Related Categories'), blank=True)
 
-    author = models.ForeignKey(Publisher, on_delete=models.PROTECT)
+    author = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -99,8 +101,13 @@ class ArticleContent(models.Model):
     tags = models.ManyToManyField(Tag, related_name='articles_contents', blank=True)
     image = models.ImageField(upload_to='articles_contents', blank=True, null=True)
 
-    content = HTMLField()
+    content = CKEditor5Field(config_name='default')
 
     class Meta:
         verbose_name = gettext_lazy('Articles Contents')
         unique_together = ('article', 'language')
+
+    def save(self, *args, **kwargs):
+        self.content = self.content.replace('<article>', '').replace('</article>', '')
+        self.full_clean()
+        return super().save(*args, **kwargs)

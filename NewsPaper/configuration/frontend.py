@@ -22,3 +22,33 @@ class FrontendConfig:
             },
         },
     ]
+
+    CKEDITOR_5_CUSTOM_CSS = 'css/ckeditor5/admin_dark_mode_fix.css'
+    CKEDITOR_5_CONFIGS = {
+        "default": {
+            "toolbar": [
+                "bold",
+                "italic",
+                "underline",
+                "strikethrough",
+                "link",
+                'heading', ' | ', 'outdent', 'indent', ' | ',
+                "bulletedList",
+                "numberedList",
+                "blockQuote",
+                "imageUpload",  # Enable image upload
+                "mediaEmbed",
+                'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
+                'todoList', '|', '|',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'removeFormat',
+                'insertTable',
+            ],
+            "image": {
+                "toolbar": [
+                    "imageTextAlternative",
+                    "imageStyle:full",
+                    "imageStyle:side",
+                ],
+            },
+        },
+    }

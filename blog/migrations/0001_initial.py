@@ -2,7 +2,6 @@
 
 import django.db.models.deletion
 import mptt.fields
-import tinymce.models
 from django.conf import settings
 from django.db import migrations, models
 
@@ -88,7 +87,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=256)),
                 ('description', models.TextField()),
                 ('image', models.ImageField(blank=True, null=True, upload_to='articles_contents')),
-                ('content', tinymce.models.HTMLField()),
+                ('content', models.TextField()),
                 ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='content',
                                               to='blog.article')),
                 ('tags', models.ManyToManyField(blank=True, related_name='articles_contents', to='blog.tag')),

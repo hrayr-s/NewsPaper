@@ -5,7 +5,9 @@ from django.utils.text import slugify
 
 
 class User(AbstractUser):
-    ...
+
+    def get_or_create_publisher(self):
+        return Publisher.objects.get_or_create(user_ptr=self, defaults={"slug": self.username})[0]
 
 
 class Publisher(User):
@@ -28,5 +30,5 @@ class Publisher(User):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.username)
         super().save(*args, **kwargs)
