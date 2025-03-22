@@ -49,7 +49,7 @@ class CategoryContent(models.Model):
 
 
 class Article(models.Model):
-    slug = models.SlugField()
+    slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name=gettext_lazy("Article slug"))
     category = models.ForeignKey(
         Category,
         related_name='main_articles',

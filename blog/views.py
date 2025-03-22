@@ -17,8 +17,12 @@ class HomeView(ListView):
     model = Article
     paginate_by = DEFAULT_ARTICLES_PER_PAGE
 
-    def get_context_data(self, *args, object_list=None, **kwargs):
-        context = get_home_page_context(self.request)
+    def get_queryset(self):
+        return Article.objects.filter(published=True)
+
+    def get_context_data(self, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context.update(get_home_page_context(self.request))
 
         return context
 

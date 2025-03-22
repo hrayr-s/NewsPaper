@@ -46,11 +46,11 @@ def get_home_page_context(request):
     context['last_post_slug'] = last_post and last_post.slug
 
     # All news ordered by published time
-    context['news_paper'] = Article.objects.all().exclude(
+    context['news_paper'] = article_struct_from_queryset(Article.objects.all().exclude(
         id__in=[
             *(last_post and [last_post.id] or []),
             *[article.id for article in context['featured_articles']]
         ]
-    )
+    ))
 
     return context
